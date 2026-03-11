@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../css/EditUser.css";
 
+
 function EditUser() {
 
   const { id } = useParams();
@@ -21,7 +22,7 @@ function EditUser() {
 
   useEffect(() => {
 
-    fetch(`http://localhost:3002/api/users/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`)
       .then(res => res.json())
       .then(data => setForm(data));
 
@@ -44,7 +45,7 @@ function EditUser() {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:3002/api/users/${id}`,{
+    await fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`,{
       method:"PUT",
       headers:{
         "Content-Type":"application/json"

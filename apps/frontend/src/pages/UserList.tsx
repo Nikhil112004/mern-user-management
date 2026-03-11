@@ -8,7 +8,7 @@ function UserList() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3002/api/users?page=${page}&limit=6`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/users?page=${page}&limit=6`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data.users || []);
@@ -18,7 +18,7 @@ function UserList() {
   const handleDelete = async (id: string) => {
     if (!window.confirm("Delete this user?")) return;
 
-    await fetch(`http://localhost:3002/api/users/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`, {
       method: "DELETE",
     });
 
@@ -56,7 +56,7 @@ function UserList() {
           />
 
           <a
-            href="http://localhost:3002/api/users/export"
+            href={`${import.meta.env.VITE_API_URL}/api/users/export`}
             className="export-btn"
           >
             Export CSV

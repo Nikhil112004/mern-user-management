@@ -34,7 +34,7 @@ function AddUser() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    await fetch("http://localhost:3002/api/users", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

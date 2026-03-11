@@ -11,7 +11,7 @@ function ViewUser() {
 
   useEffect(()=>{
 
-    fetch(`http://localhost:3002/api/users/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`)
     .then(res=>res.json())
     .then(data=>setUser(data));
 
