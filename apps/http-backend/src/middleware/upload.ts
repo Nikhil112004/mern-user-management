@@ -3,13 +3,14 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 import cloudinary from "../config/cloudinary.js";
 
 const storage = new CloudinaryStorage({
-  cloudinary,
+  cloudinary: cloudinary,
   params: async (req, file) => {
     return {
       folder: "mern-users",
-      allowed_formats: ["jpg", "png", "jpeg"],
+      resource_type: "image",
+      public_id: Date.now() + "-" + file.originalname
     };
-  },
+  }
 });
 
 const upload = multer({ storage });
