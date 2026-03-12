@@ -23,14 +23,31 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
-    try {
-        const user = new User(req.body);
-        const savedUser = await user.save();
-        res.status(201).json(savedUser)
-    } catch (error) {
-        res.status(500).json({ message: "Error creating user"})
-    }
-}
+  try {
+
+    const profileImage = req.file ? (req.file as any).path : null;
+
+    const user = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      mobile: req.body.mobile,
+      gender: req.body.gender,
+      status: req.body.status,
+      location: req.body.location,
+      profile: profileImage
+    });
+
+    await user.save();
+
+    res.status(201).json(user);
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Error creating user"
+    });
+  }
+};
 
 export const getUserById = async (req: Request, res: Response) => {
     try {
