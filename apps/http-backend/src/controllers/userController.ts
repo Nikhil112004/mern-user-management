@@ -25,7 +25,11 @@ export const getUsers = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
 
-    const profileImage = req.file ? (req.file as any).path : null;
+    let profileImage = "";
+
+    if (req.file) {
+      profileImage = (req.file as any).path;
+    }
 
     const user = new User({
       firstName: req.body.firstName,
@@ -43,9 +47,8 @@ export const createUser = async (req: Request, res: Response) => {
     res.status(201).json(user);
 
   } catch (error) {
-    res.status(500).json({
-      message: "Error creating user"
-    });
+    console.error(error);
+    res.status(500).json({ message: "Error creating user" });
   }
 };
 
