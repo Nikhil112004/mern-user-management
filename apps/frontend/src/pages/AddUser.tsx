@@ -177,6 +177,9 @@ function AddUser() {
             </div>
 
             <div className="form-actions">
+              <button type="submit" className="save-btn">
+                Save User
+              </button>
               <button
                 type="button"
                 className="cancel-btn"
@@ -185,9 +188,7 @@ function AddUser() {
                 Cancel
               </button>
 
-              <button type="submit" className="save-btn">
-                Save User
-              </button>
+              
             </div>
           </form>
         </div>
