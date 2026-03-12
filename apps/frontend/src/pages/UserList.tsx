@@ -26,14 +26,11 @@ function UserList() {
   };
 
   const filteredUsers = users.filter((u) =>
-    `${u.firstName} ${u.lastName}`
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    `${u.firstName} ${u.lastName}`.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
     <div className="dashboard">
-
       <header className="header">
         <div className="header-container">
           <h1>User Management</h1>
@@ -45,9 +42,7 @@ function UserList() {
       </header>
 
       <main className="main">
-
         <div className="filters">
-
           <input
             className="search-input"
             placeholder="Search users..."
@@ -61,25 +56,27 @@ function UserList() {
           >
             Export CSV
           </a>
-
         </div>
 
-
         <div className="user-grid">
-
           {filteredUsers.map((user) => (
-
             <div className="user-card" key={user._id}>
-
               <div className="user-header">
-
                 <div className="avatar">
-                  {user.firstName?.[0]}
-                  {user.lastName?.[0]}
+                  {user.profile ? (
+                    <img src={user.profile} alt="avatar" />
+                  ) : (
+                    <span>
+                      {user.firstName[0]}
+                      {user.lastName[0]}
+                    </span>
+                  )}
                 </div>
 
                 <div>
-                  <h3>{user.firstName} {user.lastName}</h3>
+                  <h3>
+                    {user.firstName} {user.lastName}
+                  </h3>
 
                   <span
                     className={
@@ -91,12 +88,9 @@ function UserList() {
                     {user.status || "Active"}
                   </span>
                 </div>
-
               </div>
 
-
               <div className="user-info">
-
                 <div>
                   <span>Email</span>
                   <p>{user.email}</p>
@@ -111,12 +105,9 @@ function UserList() {
                   <span>Gender</span>
                   <p>{user.gender}</p>
                 </div>
-
               </div>
 
-
               <div className="actions">
-
                 <Link to={`/view-user/${user._id}`}>
                   <button className="view-btn">View</button>
                 </Link>
@@ -131,33 +122,20 @@ function UserList() {
                 >
                   Delete
                 </button>
-
               </div>
-
             </div>
-
           ))}
-
         </div>
 
-
         <div className="pagination">
-
-          <button
-            disabled={page === 1}
-            onClick={() => setPage(page - 1)}
-          >
+          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
             Previous
           </button>
 
           <span className="page-number">{page}</span>
 
-          <button onClick={() => setPage(page + 1)}>
-            Next
-          </button>
-
+          <button onClick={() => setPage(page + 1)}>Next</button>
         </div>
-
       </main>
     </div>
   );
